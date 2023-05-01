@@ -29,7 +29,7 @@ async function main() {
 
   if(metadata) {
     core.info(`saving artifacts JSON metadata to ${metadata}`);
-    saveArtifactsJSON(metadata, artifacts);
+    saveJSON(metadata, artifacts);
   }
 
   } catch (error) {
@@ -72,7 +72,7 @@ async function downloadArtifact(artifact) {
   zip.extractAllTo(`${path}/${artifact.id}`);
 }
 
-function saveArtifactsJSON(filePath, content) {
+function saveJSON(filePath, content) {
   // Create directory if it doesn't exists
   const dirPath = path.dirname(filePath);
   if (!fs.existsSync(dirPath)) {
