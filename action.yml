@@ -1,7 +1,7 @@
 name: download-artifacts-via-regex
 description: 'Download all artifacts by regex'
 inputs:
-  github_token:
+  github-token:
     description: GitHub token
     required: false
     default: ${{ github.token }}
@@ -12,10 +12,10 @@ inputs:
   regex:
     description: todo # TODO
     required: true
-  download_path:
+  download-path:
     description: download artifacts to this directory
     required: true
-  artifacts_json_metadata:
+  artifacts-json-metadata:
     description: todo # TODO Put JSON information about artifacts to file
     required: false
 runs:

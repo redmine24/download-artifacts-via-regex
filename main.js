@@ -6,11 +6,11 @@ const { Octokit } = require('@octokit/core');
 const { paginateRest } = require('@octokit/plugin-paginate-rest');
 const AdmZip = require('adm-zip');
 
-const token = core.getInput("github_token", { required: true })
+const token = core.getInput("github-token", { required: true })
 const [owner, repo] = core.getInput("repo", { required: true }).split("/")
 const regex = core.getInput("regex", { required: true })
-const download_path = core.getInput("download_path", { required: true })
-const artifacts_json_metadata = core.getInput("artifacts_json_metadata", { required: false })
+const download_path = core.getInput("download-path", { required: true })
+const artifacts_json_metadata = core.getInput("artifacts-json-metadata", { required: false })
 
 const OctoPag = Octokit.plugin(paginateRest);
 const octokit = new OctoPag({ auth: token });
