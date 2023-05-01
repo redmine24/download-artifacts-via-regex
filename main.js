@@ -9,8 +9,8 @@ const AdmZip = require('adm-zip');
 const token = core.getInput("github_token", { required: true })
 const [owner, repo] = core.getInput("repo", { required: true }).split("/")
 const regex = core.getInput("regex", { required: true })
-const path = core.getInput("path", { required: true })
-const metadata = core.getInput("metadata", { required: false })
+const download_path = core.getInput("download_path", { required: true })
+const artifacts_json_metadata = core.getInput("artifacts_json_metadata", { required: false })
 
 const OctoPag = Octokit.plugin(paginateRest);
 const octokit = new OctoPag({ auth: token });
@@ -27,9 +27,9 @@ async function main() {
       await downloadArtifact(artifact);
     }
 
-  if(metadata) {
-    core.info(`saving artifacts JSON metadata to ${metadata}`);
-    saveJSON(metadata, artifacts);
+  if(artifacts_json_metadata) {
+    core.info(`saving artifacts JSON metadata to ${artifacts_json_metadata}`);
+    saveJSON(artifacts_json_metadata, artifacts);
   }
 
   } catch (error) {
@@ -69,7 +69,7 @@ async function downloadArtifact(artifact) {
   );
 
   const zip = new AdmZip(Buffer.from(artifactZip.data));
-  zip.extractAllTo(`${path}/${artifact.id}`);
+  zip.extractAllTo(`${download_path}/${artifact.id}`);
 }
 
 function saveJSON(filePath, content) {
