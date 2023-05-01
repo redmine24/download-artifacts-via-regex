@@ -12,10 +12,10 @@ inputs:
   regex:
     description: todo # TODO
     required: true
-  path:
+  download_path:
     description: download artifacts to this directory
     required: true
-  metadata:
+  artifacts_json_metadata:
     description: todo # TODO Put JSON information about artifacts to file
     required: false
 runs:
