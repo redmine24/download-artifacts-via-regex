@@ -3,19 +3,22 @@ description: 'Download all artifacts by regex'
 inputs:
   github_token:
     description: GitHub token
-    required: false
+    required: true
     default: ${{ github.token }}
   repo:
     description: Repository name with owner (like actions/checkout)
-    required: false
+    required: true
     default: ${{ github.repository }}
   regex:
     description: todo # TODO
-    required: false
+    required: true
     default: "^.*$"
   path:
     description: download artifacts to this directory
     required: true
+  metadata:
+    description: todo # TODO Put JSON information about artifacts to file
+    default: false
 runs:
   using: 'node16'
   main: 'main.js'

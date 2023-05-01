@@ -7,6 +7,7 @@ const token = core.getInput("github_token", { required: true })
 const [owner, repo] = core.getInput("repo", { required: true }).split("/")
 const regex = core.getInput("regex", { required: true })
 const path = core.getInput("path", { required: true })
+const metadata = core.getInput("metadata", { required: true })
 
 const OctoPag = Octokit.plugin(paginateRest);
 const octokit = new OctoPag({ auth: token });
@@ -22,6 +23,11 @@ async function main() {
     for (const artifact of artifacts) {
       await downloadArtifact(artifact);
     }
+
+	if(metadata) {
+		core.info(JSON.stringify(artifacts, null, 2))
+	}
+
   } catch (error) {
     core.setFailed(error.message);
   }
