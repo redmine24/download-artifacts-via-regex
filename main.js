@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const core = require('@actions/core');
 const { Octokit } = require('@octokit/core');
 const { paginateRest } = require('@octokit/plugin-paginate-rest');
@@ -70,9 +73,6 @@ async function downloadArtifact(artifact) {
 }
 
 function saveArtifactsJSON(filePath, content) {
-  const fs = require('fs');
-  const path = require('path');
-
   // Create directory if it doesn't exists
   const dirPath = path.dirname(filePath);
   if (!fs.existsSync(dirPath)) {
