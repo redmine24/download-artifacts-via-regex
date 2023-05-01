@@ -18,7 +18,6 @@ inputs:
     required: true
   metadata:
     description: todo # TODO Put JSON information about artifacts to file
-    default: false
 runs:
   using: 'node16'
   main: 'main.js'
