@@ -24,10 +24,10 @@ async function main() {
       await downloadArtifact(artifact);
     }
 
-	if(metadata) {
-		core.info(`metadata: ${metadata}`)
-		core.info(JSON.stringify(artifacts, null, 2))
-	}
+  if(metadata) {
+    core.info(`saving artifacts JSON metadata to ${metadata}`);
+    saveArtifactsJSON(metadata, artifacts);
+  }
 
   } catch (error) {
     core.setFailed(error.message);
@@ -68,3 +68,21 @@ async function downloadArtifact(artifact) {
   const zip = new AdmZip(Buffer.from(artifactZip.data));
   zip.extractAllTo(`${path}/${artifact.id}`);
 }
+
+function saveArtifactsJSON(filePath, content) {
+  const fs = require('fs');
+  const path = require('path');
+
+  // Create directory if it doesn't exists
+  const dirPath = path.dirname(filePath);
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+
+  // Save content to the file
+  fs.writeFileSync(
+    filePath,
+    JSON.stringify(content, null, 2)
+  );
+}
+
